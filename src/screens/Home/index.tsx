@@ -1,13 +1,14 @@
 import { useState } from "react";
+import { FlatList } from "react-native";
 import { Container, HomeHeader, Logo, ProfilePhoto,
         StatisticsContainer, StatisticsTitle, StatisticsSubtitle, StatisticsIcon,
         StatisticsButton, Title } from "./styles";
+import { useNavigation } from "@react-navigation/native";
 
 import logoImg from '@assets/logo.png';
 
 import { Button } from "@components/Button";
 import { MealCard } from "@components/MealCard";
-import { FlatList } from "react-native";
 
 export type MEALDATA = {
     hour: string;
@@ -18,6 +19,12 @@ export type MEALDATA = {
 export function Home(){
     const [meals, setMeals] = useState<MEALDATA[]>([{hour: '20:00', title: 'macarrão', isHealthy: false}, {hour: '15:00', title: 'whey com banana', isHealthy: true}, {hour: '12:00', title: 'almoço', isHealthy: true}])
 
+    const navigation = useNavigation()
+
+    function goToStatistics(){
+        navigation.navigate('statistics')
+    }
+
     return(
         <Container>
            <HomeHeader>
@@ -27,7 +34,7 @@ export function Home(){
            </HomeHeader>
 
            <StatisticsContainer>
-                <StatisticsButton>
+                <StatisticsButton onPress={goToStatistics}>
                     <StatisticsIcon name="arrow-up-right"/>
                 </StatisticsButton>
                
