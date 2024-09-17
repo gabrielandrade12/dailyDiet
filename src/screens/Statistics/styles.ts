@@ -34,7 +34,7 @@ export const Subtitle = styled.Text`
         color: ${theme.COLORS.GRAY_2};
     `};
     align-self: center;
-    `;
+`;
     
     // Área das estatísticas gerais
     

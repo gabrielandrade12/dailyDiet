@@ -60,7 +60,11 @@ export function Statistics(){
                     </InfoTitle>
 
                     <Subtitle>
-                        refeições dentro da {'\n'}dieta
+                        refeições dentro da
+                    </Subtitle>
+
+                    <Subtitle>
+                        dieta
                     </Subtitle>
                 </HealthyContainer>
 
@@ -70,7 +74,11 @@ export function Statistics(){
                     </InfoTitle>
 
                     <Subtitle>
-                        refeições fora da {'\n'}dieta
+                        refeições fora da
+                    </Subtitle>
+
+                    <Subtitle>
+                        dieta
                     </Subtitle>
                 </HealthyContainer>
             </View>

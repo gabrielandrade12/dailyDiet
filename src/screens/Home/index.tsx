@@ -25,6 +25,10 @@ export function Home(){
         navigation.navigate('statistics')
     }
 
+    function goToCreateMeal(){
+        navigation.navigate('createMeal');
+    }
+
     return(
         <Container>
            <HomeHeader>
@@ -56,6 +60,7 @@ export function Home(){
                 hasIcon
                 iconName="plus"
                 style={{ marginBottom: 32 }}
+                onPress={goToCreateMeal}
            />
 
 
