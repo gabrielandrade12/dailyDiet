@@ -1,16 +1,25 @@
+import { useState } from "react"
 import { TouchableOpacity, View } from "react-native"
 import { useNavigation } from "@react-navigation/native"
-import { Container, BackIcon, Title, Container2, InputTitle, Input, HorizontalContainer, InsideDietButton,
+import { Container, BackIcon, Title, Container2, InputTitle, Input, DateInput, HorizontalContainer, InsideDietButton,
         HealthyIndicator, InsideDietButtonTitle
  } from "./styles"
 
 import { Button } from "@components/Button"
 
 export function CreateMeal(){
+    const [ date, setDate ] = useState('');
+    const [ hour, setHour ] = useState('');
+    const [ healthy, setHealthy ] = useState<boolean>(true);
+
     const navigation = useNavigation();
 
     function handleGoHome(){
         navigation.navigate('home');
+    }
+
+    function handleFeedBackMeal(){
+        navigation.navigate('feedBackCreateMeal')
     }
 
     return(
@@ -49,7 +58,13 @@ export function CreateMeal(){
                             Data
                         </InputTitle>
 
-                        <Input
+                        <DateInput
+                            type="datetime"
+                            options={{
+                                format: 'DD/MM/YYYY'
+                            }}
+                            value={date}
+                            onChangeText={setDate}
                         />
                     </View>
 
@@ -58,7 +73,14 @@ export function CreateMeal(){
                             Hora
                         </InputTitle>
 
-                        <Input/>
+                        <DateInput
+                            type="datetime"
+                            options={{
+                                format: 'HH:mm'
+                            }}
+                            value={hour}
+                            onChangeText={setHour}
+                        />
                     </View>
                 </HorizontalContainer>
 
@@ -67,7 +89,11 @@ export function CreateMeal(){
                 </InputTitle>
 
                 <HorizontalContainer style={{ flex: 1}}>
-                    <InsideDietButton>
+                    <InsideDietButton 
+                        onPress={() => setHealthy(true)} 
+                        isActive={healthy} 
+                        buttonColor="GREEN"         
+                    >
                         <HealthyIndicator isHealthy/>
 
                         <InsideDietButtonTitle>
@@ -75,7 +101,12 @@ export function CreateMeal(){
                         </InsideDietButtonTitle>
                     </InsideDietButton>
 
-                    <InsideDietButton style={{ marginLeft: 8 }}>
+                    <InsideDietButton 
+                        style={{ marginLeft: 8 }}
+                        onPress={() => setHealthy(false)}
+                        isActive={!healthy}
+                        buttonColor="RED"
+                    >
                         <HealthyIndicator isHealthy={false}/>
 
                         <InsideDietButtonTitle>
@@ -86,6 +117,7 @@ export function CreateMeal(){
 
                 <Button
                     title="Cadastrar refeição"
+                    onPress={handleFeedBackMeal}
                 />
             </Container2>
         </Container>

@@ -2,9 +2,15 @@ import styled, {css} from "styled-components/native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { AntDesign } from '@expo/vector-icons';
 import { TouchableOpacity } from "react-native";
+import { TextInputMask } from "react-native-masked-text";
 
 type Props = {
     isHealthy: boolean;
+}
+
+type HealthyButtonStyle = {
+    isActive?: boolean;
+    buttonColor: 'GREEN' | 'RED';
 }
 
 export const Container = styled(SafeAreaView)`
@@ -68,12 +74,26 @@ export const HorizontalContainer = styled.View`
     justify-content: space-between;
 `;
 
-export const InsideDietButton = styled(TouchableOpacity)`
+export const DateInput = styled(TextInputMask)`
+    width: 100%;
+
+    padding: 14px;
+
+    border: 1px solid;
+    border-radius: 6px;
+    border-color: ${({ theme }) => theme.COLORS.GRAY_5};
+
+    margin-bottom: 24px;
+`;
+
+export const InsideDietButton = styled(TouchableOpacity)<HealthyButtonStyle>`
     flex: 1;
     flex-direction: row;
     padding: 16px;
 
     border-radius: 6px;
+    border: ${({ isActive }) => isActive ? 1 : 0}px solid;
+    border-color: ${({ theme, buttonColor }) => buttonColor === 'GREEN' ? theme.COLORS.GREEN_DARK : theme.COLORS.RED_DARK};
 
     background-color: ${({ theme }) => theme.COLORS.GRAY_6};
 
