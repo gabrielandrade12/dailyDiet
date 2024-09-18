@@ -95,7 +95,8 @@ export const InsideDietButton = styled(TouchableOpacity)<HealthyButtonStyle>`
     border: ${({ isActive }) => isActive ? 1 : 0}px solid;
     border-color: ${({ theme, buttonColor }) => buttonColor === 'GREEN' ? theme.COLORS.GREEN_DARK : theme.COLORS.RED_DARK};
 
-    background-color: ${({ theme }) => theme.COLORS.GRAY_6};
+    background-color: ${({ theme, isActive, buttonColor }) => !isActive ? theme.COLORS.GRAY_6 : buttonColor === 'GREEN' ? theme.COLORS.GREEN_LIGHT : theme.COLORS.RED_LIGHT };
+        
 
     align-items: center;
     justify-content: center;

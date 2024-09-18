@@ -18,6 +18,7 @@ export const Container = styled(TouchableOpacity)<Props>`
 
     background-color: ${({ theme, type }) => type === 'PRIMARY' ? theme.COLORS.GRAY_2 : theme.COLORS.GRAY_7};
 
+    border: ${({ type }) => type === 'SECONDARY' ? 1 : 0}px;
     border-radius: 6px;
 `;
 

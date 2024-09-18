@@ -5,7 +5,9 @@ export declare global {
             statistics: undefined;
             createMeal: undefined;
             feedBackCreateMeal: undefined;
-            mealInfo: undefined;
+            mealInfo: {
+                isHealthy: boolean;
+            };
             editMeal: undefined;
         }
     }

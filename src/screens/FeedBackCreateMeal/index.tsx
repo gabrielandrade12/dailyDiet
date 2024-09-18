@@ -9,7 +9,7 @@ export function FeedBackCreateMeal(){
     const navigation = useNavigation();
 
     function goHome(){
-        navigation.navigate('home')
+        navigation.navigate('home');
     }
 
     return(

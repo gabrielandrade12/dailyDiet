@@ -1,13 +1,23 @@
+import { TouchableOpacityProps } from "react-native";
+import { useNavigation } from "@react-navigation/native";
+
 import { Container, MealHour, Title, HealthyIndicator } from "./styles";
+
 import { MEALDATA } from "@screens/Home";
 
-type Props = {
+type Props = TouchableOpacityProps & {
     mealInfo: MEALDATA;
 }
 
-export function MealCard({ mealInfo }: Props){
+export function MealCard({ mealInfo, ...rest }: Props){
+    const navigation = useNavigation();
+
+    function goToMealInfo(){
+        navigation.navigate('mealInfo', { isHealthy: mealInfo.isHealthy });
+    }
+
     return(
-        <Container>
+        <Container onPress={goToMealInfo} {...rest}>
             <MealHour>
                 {mealInfo.hour}
             </MealHour>
