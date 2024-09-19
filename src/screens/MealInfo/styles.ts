@@ -102,3 +102,39 @@ export const HealthyIndicatorText = styled.Text`
         color: ${theme.COLORS.GRAY_1};
     `};
 `;
+
+//Componentes para estilização do modal
+
+export const ModalContainer = styled.View`
+    flex: 1;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.5);
+`;
+
+export const BlurBackground = styled.View`
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.3);
+`;
+
+export const ModalView = styled.View`
+  width: 80%;
+  background-color: white;
+  border-radius: 10px;
+  padding: 20px;
+  align-items: center;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
+`;
+
+export const ModalTitle = styled.Text`
+    ${({ theme }) => css`
+        font-size: ${theme.FONT_SIZE.LG}px;
+        font-family: ${theme.FONT_FAMILY.BOLD};
+        color: ${theme.COLORS.GRAY_2};
+    `};
+
+    margin-bottom: 32px
+`;
+

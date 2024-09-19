@@ -1,7 +1,9 @@
-import { TouchableOpacity, View } from "react-native";
+import { useState } from "react";
+import { TouchableOpacity, View, Modal } from "react-native";
 import { useNavigation, useRoute } from "@react-navigation/native";
 import { Container, BackIcon, Title, Container2, MealName, MealText, DateHourText,
-    IsInsideDietContainer, HealthyIndicator, HealthyIndicatorText } from "./styles";
+    IsInsideDietContainer, HealthyIndicator, HealthyIndicatorText, ModalContainer,
+    BlurBackground, ModalView, ModalTitle } from "./styles";
     
 import { Button } from "@components/Button";
 
@@ -10,6 +12,7 @@ type RouteParams = {
 }
 
 export function MealInfo(){
+    const [ modalVisible, setModalVisible ] = useState(false)
     const navigation = useNavigation();
 
     const route = useRoute();
@@ -17,6 +20,10 @@ export function MealInfo(){
 
     function goHome(){
         navigation.navigate('home');
+    }
+
+    function goEditMeal(){
+        navigation.navigate('editMeal')
     }
 
     return(
@@ -63,6 +70,7 @@ export function MealInfo(){
                     hasIcon
                     iconName="pencil"
                     style={{ marginBottom: 9 }}
+                    onPress={goEditMeal}
                 />
 
                 <Button
@@ -70,7 +78,38 @@ export function MealInfo(){
                     hasIcon
                     iconName="trash"
                     type="SECONDARY"
+                    onPress={() => setModalVisible(true)}
                 />
+
+                <Modal
+                    animationType="fade"
+                    transparent
+                    visible={modalVisible}
+                    onRequestClose={() => setModalVisible(false)}
+                >
+                    <ModalContainer>
+                        <BlurBackground/>
+                        <ModalView>
+                            <ModalTitle>
+                                Deseja realmente excluir o registro da refeição?
+                            </ModalTitle>
+
+                            <View style={{  flexDirection: 'row', justifyContent: 'space-between'}}>
+                                <Button
+                                    title="Cancelar"
+                                    type="SECONDARY"
+                                    onPress={() => setModalVisible(false)}
+                                    style={{ flex: 1, marginRight: 12}}
+                                />
+                                <Button
+                                    title="Sim, excluir"
+                                    onPress={() => setModalVisible(false)}
+                                    style={{ flex: 1 }}
+                                />
+                            </View>
+                        </ModalView>
+                    </ModalContainer>
+                </Modal>
             </Container2>
         </Container>
     )
