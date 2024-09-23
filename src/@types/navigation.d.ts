@@ -1,12 +1,16 @@
+import { MEALDATA } from "@screens/Home";
+
 export declare global {
     namespace ReactNavigation {
         interface RootParamList {
             home: undefined;
-            statistics: undefined;
+            statistics: undefined
             createMeal: undefined;
-            feedBackCreateMeal: undefined;
-            mealInfo: {
+            feedBackCreateMeal: {
                 isHealthy: boolean;
+            };
+            mealInfo: {
+                mealsData: MEALDATA;
             };
             editMeal: undefined;
         }

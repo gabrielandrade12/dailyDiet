@@ -84,11 +84,11 @@ export const IsInsideDietContainer = styled.View`
     align-self: flex-start;
 `;
 
-export const HealthyIndicator = styled.View`
+export const HealthyIndicator = styled.View<Props>`
     width: 8px;
     height: 8px;
 
-    background-color: ${({ theme }) => theme.COLORS.GREEN_DARK};
+    background-color: ${({ theme, isHealthy }) => isHealthy ? theme.COLORS.GREEN_DARK : theme.COLORS.RED_DARK};
 
     border-radius: 50px;
 

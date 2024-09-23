@@ -6,6 +6,7 @@ import { Container, MealHour, Title, HealthyIndicator } from "./styles";
 import { MEALDATA } from "@screens/Home";
 
 type Props = TouchableOpacityProps & {
+    key: string;
     mealInfo: MEALDATA;
 }
 
@@ -13,7 +14,7 @@ export function MealCard({ mealInfo, ...rest }: Props){
     const navigation = useNavigation();
 
     function goToMealInfo(){
-        navigation.navigate('mealInfo', { isHealthy: mealInfo.isHealthy });
+        navigation.navigate('mealInfo', { mealsData: mealInfo });
     }
 
     return(

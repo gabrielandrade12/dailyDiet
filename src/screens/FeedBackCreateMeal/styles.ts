@@ -1,5 +1,9 @@
 import styled, { css } from "styled-components/native";
 
+type Props = {
+    isHealthy?: boolean;
+}
+
 export const Container = styled.View`
     flex: 1;
 
@@ -9,14 +13,15 @@ export const Container = styled.View`
     align-items: center;
 `;
 
-export const Title = styled.Text`
-    ${({ theme }) => css`
+export const Title = styled.Text<Props>`
+    ${({ theme, isHealthy }) => css`
         font-size: ${theme.FONT_SIZE.XL}px;
         font-family: ${theme.FONT_FAMILY.BOLD};
-        color: ${theme.COLORS.GREEN_DARK};
+        color: ${isHealthy ? theme.COLORS.GREEN_DARK : theme.COLORS.RED_DARK};
     `};
 
     margin-top: 130px;
+    margin-bottom: 8px
 `;
 
 export const Subtitle = styled.Text`

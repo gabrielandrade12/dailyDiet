@@ -2,7 +2,7 @@ import { useState } from "react";
 import { FlatList } from "react-native";
 import { Container, HomeHeader, Logo, ProfilePhoto,
         StatisticsContainer, StatisticsTitle, StatisticsSubtitle, StatisticsIcon,
-        StatisticsButton, Title } from "./styles";
+        StatisticsButton, Title, DateTitle } from "./styles";
 import { useNavigation } from "@react-navigation/native";
 
 import logoImg from '@assets/logo.png';
@@ -13,11 +13,15 @@ import { MealCard } from "@components/MealCard";
 export type MEALDATA = {
     hour: string;
     title: string;
+    date: string;
     isHealthy: boolean;
 }
 
 export function Home(){
-    const [meals, setMeals] = useState<MEALDATA[]>([{hour: '20:00', title: 'macarrão', isHealthy: false}, {hour: '15:00', title: 'whey com banana', isHealthy: true}, {hour: '12:00', title: 'almoço', isHealthy: true}])
+    const [meals, setMeals] = useState<MEALDATA[]>([{hour: '20:00', title: 'macarrão', date: '23/08/2024' , isHealthy: false}, {hour: '15:00', title: 'whey com banana', date: '24/08/2024', isHealthy: true},
+                                                    {hour: '12:00', title: 'almoço', date:'25/08/2024', isHealthy: true}, {hour: '19:00', title: 'janta', date:'26/08/2024', isHealthy: true},
+                                                    {hour: '9:00', title: 'fruta', date:'26/08/2024', isHealthy: false}, {hour: '10:00', title: 'iogurte', date:'26/08/2024', isHealthy: true}])
+    const [mealsDate, setMealsDate] = useState<string[]>(['23/08/2024', '24/08/2024', '25/08/2024', '26/08/2024']);
 
     const navigation = useNavigation()
 
@@ -29,6 +33,7 @@ export function Home(){
         navigation.navigate('createMeal');
     }
 
+    const mealsInsideDiet = meals.filter(meal => meal.isHealthy).length * 100 / meals.length
     return(
         <Container>
            <HomeHeader>
@@ -43,7 +48,7 @@ export function Home(){
                 </StatisticsButton>
                
                 <StatisticsTitle>
-                    90,86%
+                    {mealsInsideDiet.toFixed(2) + '%'}
                 </StatisticsTitle>
 
                 <StatisticsSubtitle>
@@ -65,12 +70,15 @@ export function Home(){
 
 
             <FlatList
-                data={meals}
-                keyExtractor={meals => meals.title}
+                data={mealsDate}
+                keyExtractor={mealsDate => mealsDate}
                 renderItem={({ item }) => (
-                    <MealCard
-                        mealInfo={item}
-                    />
+                    <>
+                        <DateTitle>
+                            {item}
+                        </DateTitle>
+                        {meals.map(meal => meal.date === item && <MealCard key={meal.title} mealInfo={meal}/>)}
+                    </>
                 )}
             />
         </Container>

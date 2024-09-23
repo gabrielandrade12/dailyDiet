@@ -6,9 +6,10 @@ import { Container, BackIcon, Title, Container2, MealName, MealText, DateHourTex
     BlurBackground, ModalView, ModalTitle } from "./styles";
     
 import { Button } from "@components/Button";
+import { MEALDATA } from "@screens/Home";
 
 type RouteParams = {
-    isHealthy?: boolean;
+    mealsData: MEALDATA;
 }
 
 export function MealInfo(){
@@ -16,7 +17,7 @@ export function MealInfo(){
     const navigation = useNavigation();
 
     const route = useRoute();
-    const { isHealthy } = route.params as RouteParams;
+    const { mealsData } = route.params as RouteParams;
 
     function goHome(){
         navigation.navigate('home');
@@ -27,7 +28,7 @@ export function MealInfo(){
     }
 
     return(
-        <Container isHealthy={isHealthy}>
+        <Container isHealthy={mealsData!.isHealthy}>
             <TouchableOpacity onPress={goHome}>
                 <BackIcon
                     name="arrowleft"
@@ -40,7 +41,7 @@ export function MealInfo(){
 
             <Container2>
                 <MealName>
-                    Sanduíche
+                    {mealsData.title.toUpperCase()}
                 </MealName>
 
                 <MealText>
@@ -52,16 +53,18 @@ export function MealInfo(){
                 </DateHourText>
 
                 <MealText>
-                    12/08/2022 às 16:00
+                    {mealsData.date} às {mealsData.hour}
                 </MealText>
 
                 <View style={{ flex: 1}}>
                     <IsInsideDietContainer>
-                        <HealthyIndicator/>
+                        <HealthyIndicator isHealthy={mealsData!.isHealthy}/>
 
-                        <HealthyIndicatorText>
-                            dentro da dieta
-                        </HealthyIndicatorText>
+                        {mealsData.isHealthy ? 
+                            <HealthyIndicatorText>dentro da dieta</HealthyIndicatorText>
+                            : 
+                            <HealthyIndicatorText>fora da dieta</HealthyIndicatorText>
+                        }
                     </IsInsideDietContainer>
                 </View>
 

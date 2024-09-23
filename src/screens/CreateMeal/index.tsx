@@ -19,7 +19,7 @@ export function CreateMeal(){
     }
 
     function handleFeedBackMeal(){
-        navigation.navigate('feedBackCreateMeal')
+        navigation.navigate('feedBackCreateMeal', {isHealthy: healthy})
     }
 
     return(
