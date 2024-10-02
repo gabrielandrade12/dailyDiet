@@ -1,4 +1,4 @@
-import { MEALDATA } from "@screens/Home";
+import { MealStorageDTO } from "@storage/meals/MealsStorageDTO";
 
 export declare global {
     namespace ReactNavigation {
@@ -10,7 +10,7 @@ export declare global {
                 isHealthy: boolean;
             };
             mealInfo: {
-                mealsData: MEALDATA;
+                mealsData: MealStorageDTO;
             };
             editMeal: undefined;
         }

@@ -6,8 +6,13 @@ import { Container, BackIcon, Title, Container2, InputTitle, Input, DateInput, H
  } from "./styles"
 
 import { Button } from "@components/Button"
+import { createMealDate } from "@storage/mealsDates/createMealDate"
+import { createNewMeal } from "@storage/meals/createNewMeal"
+import { MealStorageDTO } from "@storage/meals/MealsStorageDTO"
 
 export function CreateMeal(){
+    const [ mealName, setMealName ] = useState('');
+    const [ mealDescription, setMealDescription ] = useState('');
     const [ date, setDate ] = useState('');
     const [ hour, setHour ] = useState('');
     const [ healthy, setHealthy ] = useState<boolean>(true);
@@ -20,6 +25,25 @@ export function CreateMeal(){
 
     function handleFeedBackMeal(){
         navigation.navigate('feedBackCreateMeal', {isHealthy: healthy})
+    }
+
+    async function handleCreateNewMeal(){
+        try {
+            await createMealDate(date);
+
+            const MEALSINFO: MealStorageDTO = {
+                name: mealName,
+                description: mealDescription,
+                date,
+                hour,
+                isHealthy: healthy
+            };
+
+            await createNewMeal(MEALSINFO);
+            handleFeedBackMeal();
+        } catch (error) {
+            
+        }
     }
 
     return(
@@ -39,7 +63,10 @@ export function CreateMeal(){
                     Nome
                 </InputTitle>
 
-                <Input/>
+                <Input
+                    value={mealName}
+                    onChangeText={setMealName}
+                />
 
                 <InputTitle>
                     Descrição
@@ -50,6 +77,8 @@ export function CreateMeal(){
                     multiline
                     scrollEnabled
                     textAlignVertical="top"
+                    value={mealDescription}
+                    onChangeText={setMealDescription}
                 />
 
                 <HorizontalContainer>
@@ -117,7 +146,7 @@ export function CreateMeal(){
 
                 <Button
                     title="Cadastrar refeição"
-                    onPress={handleFeedBackMeal}
+                    onPress={handleCreateNewMeal}
                 />
             </Container2>
         </Container>

@@ -3,11 +3,11 @@ import { useNavigation } from "@react-navigation/native";
 
 import { Container, MealHour, Title, HealthyIndicator } from "./styles";
 
-import { MEALDATA } from "@screens/Home";
+import { MealStorageDTO } from "@storage/meals/MealsStorageDTO";
 
 type Props = TouchableOpacityProps & {
     key: string;
-    mealInfo: MEALDATA;
+    mealInfo: MealStorageDTO;
 }
 
 export function MealCard({ mealInfo, ...rest }: Props){
@@ -25,7 +25,7 @@ export function MealCard({ mealInfo, ...rest }: Props){
             
           
             <Title>
-                {mealInfo.title}
+                {mealInfo.name}
             </Title>
 
             <HealthyIndicator

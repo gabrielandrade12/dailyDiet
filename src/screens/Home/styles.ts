@@ -96,11 +96,19 @@ export const Title = styled.Text`
     margin-bottom: 8px;
 `;
 
+export const Icon = styled(Feather).attrs(({ theme }) => ({
+    size: 24,
+    color: theme.COLORS.RED_DARK
+}))`
+    margin-top: 12px;
+`;
+
 export const DateTitle = styled.Text`
     ${({ theme }) => css`
         font-family: ${theme.FONT_FAMILY.BOLD};
         font-size: ${theme.FONT_SIZE.LG}px;
         color: ${theme.COLORS.GRAY_1};
     `};
+    margin-top: 24px;
     margin-bottom: 8px
 `;

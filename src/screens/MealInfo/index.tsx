@@ -1,15 +1,16 @@
 import { useState } from "react";
-import { TouchableOpacity, View, Modal } from "react-native";
+import { TouchableOpacity, View, Modal, Alert } from "react-native";
 import { useNavigation, useRoute } from "@react-navigation/native";
 import { Container, BackIcon, Title, Container2, MealName, MealText, DateHourText,
     IsInsideDietContainer, HealthyIndicator, HealthyIndicatorText, ModalContainer,
     BlurBackground, ModalView, ModalTitle } from "./styles";
     
 import { Button } from "@components/Button";
-import { MEALDATA } from "@screens/Home";
+import { MealStorageDTO } from "@storage/meals/MealsStorageDTO";
+import { deleteMeal } from "@storage/meals/deleteMeal";
 
 type RouteParams = {
-    mealsData: MEALDATA;
+    mealsData: MealStorageDTO;
 }
 
 export function MealInfo(){
@@ -27,6 +28,30 @@ export function MealInfo(){
         navigation.navigate('editMeal')
     }
 
+    async function removeMeal(){
+        try {
+            await deleteMeal(mealsData.name);
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    async function handleDeleteMeal(){
+        Alert.alert('Deseja remover essa refeição?', '', [
+            {
+                text: 'Não',
+                style: 'cancel'
+            },
+            {
+                text: 'Sim',
+                onPress: () => {
+                    removeMeal();
+                    goHome();
+                }
+            }
+        ])
+    }
+
     return(
         <Container isHealthy={mealsData!.isHealthy}>
             <TouchableOpacity onPress={goHome}>
@@ -41,11 +66,11 @@ export function MealInfo(){
 
             <Container2>
                 <MealName>
-                    {mealsData.title.toUpperCase()}
+                    {mealsData.name.toUpperCase()}
                 </MealName>
 
                 <MealText>
-                    Sanduíche de pão integral com atum e salada de alface e tomate
+                    {mealsData.description}
                 </MealText>
 
                 <DateHourText>
@@ -81,38 +106,8 @@ export function MealInfo(){
                     hasIcon
                     iconName="trash"
                     type="SECONDARY"
-                    onPress={() => setModalVisible(true)}
+                    onPress={handleDeleteMeal}
                 />
-
-                <Modal
-                    animationType="fade"
-                    transparent
-                    visible={modalVisible}
-                    onRequestClose={() => setModalVisible(false)}
-                >
-                    <ModalContainer>
-                        <BlurBackground/>
-                        <ModalView>
-                            <ModalTitle>
-                                Deseja realmente excluir o registro da refeição?
-                            </ModalTitle>
-
-                            <View style={{  flexDirection: 'row', justifyContent: 'space-between'}}>
-                                <Button
-                                    title="Cancelar"
-                                    type="SECONDARY"
-                                    onPress={() => setModalVisible(false)}
-                                    style={{ flex: 1, marginRight: 12}}
-                                />
-                                <Button
-                                    title="Sim, excluir"
-                                    onPress={() => setModalVisible(false)}
-                                    style={{ flex: 1 }}
-                                />
-                            </View>
-                        </ModalView>
-                    </ModalContainer>
-                </Modal>
             </Container2>
         </Container>
     )
