@@ -91,9 +91,9 @@ export function Home(){
                 <ProfilePhoto source={{ uri: 'https://github.com/gabrielandrade12.png'}}/>
            </HomeHeader>
 
-           <StatisticsContainer>
+           <StatisticsContainer percentageInsideDiet={percentageInsideDiet}>
                 <StatisticsButton onPress={goToStatistics}>
-                    <StatisticsIcon name="arrow-up-right"/>
+                    <StatisticsIcon name="arrow-up-right" percentageInsideDiet={percentageInsideDiet}/>
                 </StatisticsButton>
             
                 <StatisticsTitle>

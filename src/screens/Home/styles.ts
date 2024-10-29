@@ -3,6 +3,10 @@ import styled, { css } from "styled-components/native";
 
 import { Feather } from '@expo/vector-icons';
 
+type Props = {
+    percentageInsideDiet: number;
+}
+
 export const Container = styled(SafeAreaView)`
     flex: 1;
 
@@ -34,10 +38,10 @@ export const ProfilePhoto = styled.Image`
 
 //Estilização da área que mostra a porcentagem de refeições dentro da dieta.
 
-export const StatisticsContainer = styled.View`
+export const StatisticsContainer = styled.View<Props>`
     width: 100%;
 
-    background-color: ${({ theme }) => theme.COLORS.GREEN_LIGHT};
+    background-color: ${({ theme, percentageInsideDiet }) => percentageInsideDiet >= 50 ? theme.COLORS.GREEN_LIGHT : theme.COLORS.RED_LIGHT};
 
     padding: 8px 16px 20px 16px;
     justify-content: center;
@@ -77,9 +81,9 @@ export const Form = styled.View`
 export const StatisticsButton =  styled.TouchableOpacity`
 `;
 
-export const StatisticsIcon = styled(Feather).attrs(({ theme }) => ({
+export const StatisticsIcon = styled(Feather).attrs<Props>(({ theme, percentageInsideDiet }) => ({
     size: 24,
-    color: theme.COLORS.GREEN_DARK
+    color: percentageInsideDiet >= 50 ? theme.COLORS.GREEN_DARK : theme.COLORS.RED_DARK
 }))`
     margin-left: 310px
 `;

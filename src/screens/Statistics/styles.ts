@@ -4,18 +4,22 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { AntDesign } from "@expo/vector-icons";
 
 type Props = {
+    percentageInsideDiet: number;
+}
+
+type HealthyContainerProps = {
     isHealthy: boolean;
 }
 
 export const Container = styled(SafeAreaView)<Props>`
     flex: 1;
 
-    background-color: ${({ theme, isHealthy }) => isHealthy ? theme.COLORS.GREEN_LIGHT : theme.COLORS.RED_LIGHT};
+    background-color: ${({ theme, percentageInsideDiet }) => percentageInsideDiet >= 50 ? theme.COLORS.GREEN_LIGHT : theme.COLORS.RED_LIGHT};
 `;
 
-export const BackIcon = styled(AntDesign).attrs<Props>(({ theme, isHealthy }) => ({
+export const BackIcon = styled(AntDesign).attrs<Props>(({ theme, percentageInsideDiet }) => ({
     size: 24,
-    color: isHealthy ? theme.COLORS.GREEN_DARK : theme.COLORS.RED_DARK,
+    color: percentageInsideDiet >= 50 ? theme.COLORS.GREEN_DARK : theme.COLORS.RED_DARK,
 }))` margin-bottom: 1px; margin-left: 24px`;
 
 export const Title = styled.Text`
@@ -82,7 +86,7 @@ export const InfoTitle = styled.Text`
     `};
 `;
 
-export const HealthyContainer = styled.View<Props>`
+export const HealthyContainer = styled.View<HealthyContainerProps>`
     min-width: 170px;
     padding: 16px;
     align-items: center;

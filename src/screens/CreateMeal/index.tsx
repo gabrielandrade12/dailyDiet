@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { TouchableOpacity, View } from "react-native"
+import { TouchableOpacity, View, Alert } from "react-native"
 import { useNavigation } from "@react-navigation/native"
 import { Container, BackIcon, Title, Container2, InputTitle, Input, DateInput, HorizontalContainer, InsideDietButton,
         HealthyIndicator, InsideDietButtonTitle
@@ -28,6 +28,7 @@ export function CreateMeal(){
     }
 
     async function handleCreateNewMeal(){
+        
         try {
             await createMealDate(date);
 
@@ -42,7 +43,8 @@ export function CreateMeal(){
             await createNewMeal(MEALSINFO);
             handleFeedBackMeal();
         } catch (error) {
-            
+            console.log(error)
+            Alert.alert('Erro ao criar refeição', 'Não foi possível criar a refeição')
         }
     }
 
