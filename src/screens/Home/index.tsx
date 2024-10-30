@@ -116,16 +116,6 @@ export function Home(){
                 onPress={goToCreateMeal}
            />
 
-            {meals.length > 0 ?
-                <TouchableOpacity style={{ alignSelf: 'flex-end'}} onPress={handleDeleteAll}>
-                    <Icon
-                        name="trash-2"
-                    />
-                </TouchableOpacity>
-                :
-                <View/>
-            }
-
             <FlatList
                 data={mealsDate}
                 keyExtractor={mealsDate => mealsDate}
@@ -134,7 +124,7 @@ export function Home(){
                         <DateTitle>
                             {item}
                         </DateTitle>
-                        {meals.map(meal => meal.date === item && <MealCard key={meal.hour} mealInfo={meal}/>)}
+                        {meals.map(meal => meal.date === item && <MealCard key={meal.id} mealInfo={meal}/>)}
                     </>
                 )}
                 style={{marginBottom: 12}}

@@ -6,7 +6,6 @@ import { Container, MealHour, Title, HealthyIndicator } from "./styles";
 import { MealStorageDTO } from "@storage/meals/MealsStorageDTO";
 
 type Props = TouchableOpacityProps & {
-    key: string;
     mealInfo: MealStorageDTO;
 }
 

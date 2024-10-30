@@ -41,8 +41,11 @@ export function CreateMeal(){
 
         try {
             await createMealDate(date);
+            
+            const id = data_now.toISOString()
 
             const MEALSINFO: MealStorageDTO = {
+                id,
                 name: mealName,
                 description: mealDescription,
                 date,

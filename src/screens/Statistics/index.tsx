@@ -7,12 +7,14 @@ import { Container, BackIcon, Title, Subtitle, StatisticsContainer,
 
 import { MealStorageDTO } from "@storage/meals/MealsStorageDTO";
 import { getAllMeals } from "@storage/meals/getAllMeals";
+import { getBiggestSequence } from "@storage/meals/getBiggestSequence";
 
 export function Statistics(){
     const [meals, setMeals] = useState<MealStorageDTO[]>([]);
     const [mealsInsideDiet, setMealsInsideDiet] = useState<MealStorageDTO[]>([]);
     const [mealsOutSideDiet, setMealsOutSideDiet] = useState<MealStorageDTO[]>([]);
     const [percentageInsideDiet, setPercentageInsideDiet] = useState<number>(0);
+    const [biggestHealthyMealsSequence, setBiggestHealthyMealsSequence] = useState(0);
 
     const navigation = useNavigation(); 
 
@@ -30,6 +32,9 @@ export function Statistics(){
 
             const outSideDiet = meals.filter(meal => meal.isHealthy === false);
             setMealsOutSideDiet(outSideDiet);
+
+            const sequence = await getBiggestSequence()
+            setBiggestHealthyMealsSequence(sequence)
         } catch (error) {
             Alert.alert('Erro', 'Não foi possivel carregar os dados.');
             console.log(error);
@@ -74,7 +79,7 @@ export function Statistics(){
 
             <InfoContainer>
                 <InfoTitle>
-                    22
+                    {biggestHealthyMealsSequence}
                 </InfoTitle>
 
                 <Subtitle>
