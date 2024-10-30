@@ -27,8 +27,18 @@ export function CreateMeal(){
         navigation.navigate('feedBackCreateMeal', {isHealthy: healthy})
     }
 
+    
     async function handleCreateNewMeal(){
-        
+        const data_now = new Date()
+
+        if(mealName.trim().length == 0 || date.trim().length == 0 || hour.trim().length == 0){
+            return Alert.alert('Campos obrigatórios', 'Os campos "Nome", "Data" e "Hora" são obrigatórios.')
+        }
+
+        if(parseInt(date.substring(6, 10)) < data_now.getFullYear() || parseInt(date.substring(3,5)) < (data_now.getMonth()+1) && parseInt(date.substring(6, 10)) == data_now.getFullYear() || parseInt(date.substring(0,2)) < data_now.getDate() && parseInt(date.substring(3, 5)) == (data_now.getMonth()+1)){
+            return Alert.alert('Data Inválida', 'Essa data é do passado.')
+        }
+
         try {
             await createMealDate(date);
 

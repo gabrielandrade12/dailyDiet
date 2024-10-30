@@ -12,7 +12,9 @@ export declare global {
             mealInfo: {
                 mealsData: MealStorageDTO;
             };
-            editMeal: undefined;
+            editMeal:  {
+                mealsData: MealStorageDTO;
+            };
         }
     }
 }

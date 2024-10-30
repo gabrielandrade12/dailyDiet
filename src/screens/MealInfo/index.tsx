@@ -1,9 +1,8 @@
 import { useState } from "react";
-import { TouchableOpacity, View, Modal, Alert } from "react-native";
+import { TouchableOpacity, View, Alert } from "react-native";
 import { useNavigation, useRoute } from "@react-navigation/native";
 import { Container, BackIcon, Title, Container2, MealName, MealText, DateHourText,
-    IsInsideDietContainer, HealthyIndicator, HealthyIndicatorText, ModalContainer,
-    BlurBackground, ModalView, ModalTitle } from "./styles";
+    IsInsideDietContainer, HealthyIndicator, HealthyIndicatorText} from "./styles";
     
 import { Button } from "@components/Button";
 import { MealStorageDTO } from "@storage/meals/MealsStorageDTO";
@@ -14,7 +13,6 @@ type RouteParams = {
 }
 
 export function MealInfo(){
-    const [ modalVisible, setModalVisible ] = useState(false)
     const navigation = useNavigation();
 
     const route = useRoute();
@@ -25,7 +23,7 @@ export function MealInfo(){
     }
 
     function goEditMeal(){
-        navigation.navigate('editMeal')
+        navigation.navigate('editMeal', { mealsData })
     }
 
     async function removeMeal(){

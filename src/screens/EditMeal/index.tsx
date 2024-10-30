@@ -1,16 +1,27 @@
 import { useState } from "react"
 import { TouchableOpacity, View } from "react-native"
-import { useNavigation } from "@react-navigation/native"
+import { useNavigation, useRoute } from "@react-navigation/native"
 import { Container, BackIcon, Title, Container2, InputTitle, Input, DateInput, HorizontalContainer, InsideDietButton,
         HealthyIndicator, InsideDietButtonTitle
  } from "./styles"
 
+import { MealStorageDTO } from "@storage/meals/MealsStorageDTO"
+ 
 import { Button } from "@components/Button"
 
+type RouteParams = {
+    mealsData: MealStorageDTO
+}
+
 export function EditMeal(){
-    const [ date, setDate ] = useState('');
-    const [ hour, setHour ] = useState('');
-    const [ healthy, setHealthy ] = useState<boolean>(true);
+    const route = useRoute();
+    const { mealsData } = route.params as RouteParams;
+
+    const [ mealName, setMealName ] = useState(mealsData.name);
+    const [ description, setDescription ] = useState(mealsData.description);
+    const [ date, setDate ] = useState(mealsData.date);
+    const [ hour, setHour ] = useState(mealsData.hour);
+    const [ healthy, setHealthy ] = useState<boolean>(mealsData.isHealthy);
 
     const navigation = useNavigation();
 
@@ -39,7 +50,10 @@ export function EditMeal(){
                     Nome
                 </InputTitle>
 
-                <Input/>
+                <Input
+                    onChangeText={setMealName}
+                    value={mealName}
+                />
 
                 <InputTitle>
                     Descrição
@@ -50,6 +64,8 @@ export function EditMeal(){
                     multiline
                     scrollEnabled
                     textAlignVertical="top"
+                    onChangeText={setDescription}
+                    value={description}
                 />
 
                 <HorizontalContainer>
