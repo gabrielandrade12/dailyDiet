@@ -39,6 +39,10 @@ export function CreateMeal(){
             return Alert.alert('Data Inválida', 'Essa data é do passado.')
         }
 
+        if(parseInt(hour.substring(0,2)) > 23 || parseInt(hour.substring(3,5)) > 59){
+            return Alert.alert('Horário inválido', 'Certifique-se que o horário está entre 00:00 e 23:59')
+        }
+
         try {
             await createMealDate(date);
             
