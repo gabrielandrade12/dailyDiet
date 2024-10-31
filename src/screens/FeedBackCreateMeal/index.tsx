@@ -1,4 +1,5 @@
 import { useNavigation, useRoute } from "@react-navigation/native";
+import Animated, {FadeInUp} from "react-native-reanimated";
 import { Container, Title, Subtitle, FeedBackImage } from "./styles"
 
 import { Button } from "@components/Button"
@@ -9,6 +10,8 @@ import outsideDietIMG from '@assets/feedBackImages/outsideDiet.png'
 type RouteParams = {
     isHealthy?: boolean;
 }
+
+const AnimatedContainer = Animated.createAnimatedComponent(Container)
 
 export function FeedBackCreateMeal(){
     const navigation = useNavigation();
@@ -21,7 +24,7 @@ export function FeedBackCreateMeal(){
     }
 
     return(
-        <Container>
+        <AnimatedContainer entering={FadeInUp.duration(400).delay(200)}>
             {isHealthy ? <Title isHealthy={isHealthy}>Continue assim!</Title> : <Title isHealthy={isHealthy}>Que pena!</Title>}
             
             {isHealthy ?  <Subtitle>Você continua <Subtitle style={{ fontWeight: 'bold'}}>dentro da dieta</Subtitle>. Muito bem!</Subtitle> :
@@ -36,6 +39,6 @@ export function FeedBackCreateMeal(){
                 title="Ir para a página inicial"
                 onPress={goHome}
             />
-        </Container>
+        </AnimatedContainer>
     )
 }

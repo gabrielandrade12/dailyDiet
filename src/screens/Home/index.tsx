@@ -1,8 +1,8 @@
 import { useCallback, useState } from "react";
-import { Alert, FlatList, TouchableOpacity, View } from "react-native";
+import { FlatList } from "react-native";
 import { Container, HomeHeader, Logo, ProfilePhoto,
         StatisticsContainer, StatisticsTitle, StatisticsSubtitle, StatisticsIcon,
-        StatisticsButton, Title, Icon, DateTitle } from "./styles";
+        StatisticsButton, Title, DateTitle } from "./styles";
 import { useFocusEffect, useNavigation } from "@react-navigation/native";
 
 import logoImg from '@assets/logo.png';
@@ -14,7 +14,6 @@ import { MealStorageDTO } from "@storage/meals/MealsStorageDTO";
 import { getAllMealDates } from "@storage/mealsDates/getAllMealDates";
 import { getAllMeals } from "@storage/meals/getAllMeals";
 import { deleteDate } from "@storage/mealsDates/deleteDate";
-import { deleteAllMealsAndDates } from "@storage/deleteAllMealsAndDates";
 
 export function Home(){
     const [meals, setMeals] = useState<MealStorageDTO[]>([]);
@@ -55,24 +54,6 @@ export function Home(){
             const allMeals = await getAllMeals();
             setMeals(allMeals);
         } catch (error) {
-            console.log(error);
-        }
-    }
-
-    async function handleDeleteAll(){
-        try {
-            Alert.alert('Deletar', 'Deseja deletar todas as refeições?', [
-                {
-                    text: 'Não',
-                    style: 'cancel'
-                },
-                {
-                    text: 'Sim',
-                    onPress: async () => await deleteAllMealsAndDates()
-                }
-            ])
-        } catch (error) {
-            Alert.alert('Deletar', 'Não foi possível deletar as refeições');
             console.log(error);
         }
     }

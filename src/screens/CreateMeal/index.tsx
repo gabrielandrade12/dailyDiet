@@ -1,5 +1,6 @@
 import { useState } from "react"
 import { TouchableOpacity, View, Alert } from "react-native"
+import Animated, {FadeInUp} from "react-native-reanimated"
 import { useNavigation } from "@react-navigation/native"
 import { Container, BackIcon, Title, Container2, InputTitle, Input, DateInput, HorizontalContainer, InsideDietButton,
         HealthyIndicator, InsideDietButtonTitle
@@ -9,6 +10,8 @@ import { Button } from "@components/Button"
 import { createMealDate } from "@storage/mealsDates/createMealDate"
 import { createNewMeal } from "@storage/meals/createNewMeal"
 import { MealStorageDTO } from "@storage/meals/MealsStorageDTO"
+
+const AnimatedContainer = Animated.createAnimatedComponent(Container)
 
 export function CreateMeal(){
     const [ mealName, setMealName ] = useState('');
@@ -66,7 +69,7 @@ export function CreateMeal(){
     }
 
     return(
-        <Container>
+        <AnimatedContainer entering={FadeInUp.duration(400).delay(200)}>
             <TouchableOpacity onPress={handleGoHome}>
                 <BackIcon
                     name="arrowleft"
@@ -168,6 +171,6 @@ export function CreateMeal(){
                     onPress={handleCreateNewMeal}
                 />
             </Container2>
-        </Container>
+        </AnimatedContainer>
     )
 }

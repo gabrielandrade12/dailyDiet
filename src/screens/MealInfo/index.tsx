@@ -1,5 +1,5 @@
-import { useState } from "react";
 import { TouchableOpacity, View, Alert } from "react-native";
+import Animated, {FadeInUp, FadeOutDown} from "react-native-reanimated";
 import { useNavigation, useRoute } from "@react-navigation/native";
 import { Container, BackIcon, Title, Container2, MealName, MealText, DateHourText,
     IsInsideDietContainer, HealthyIndicator, HealthyIndicatorText} from "./styles";
@@ -11,6 +11,8 @@ import { deleteMeal } from "@storage/meals/deleteMeal";
 type RouteParams = {
     mealsData: MealStorageDTO;
 }
+
+const AnimatedContainer = Animated.createAnimatedComponent(Container)
 
 export function MealInfo(){
     const navigation = useNavigation();
@@ -51,7 +53,7 @@ export function MealInfo(){
     }
 
     return(
-        <Container isHealthy={mealsData!.isHealthy}>
+        <AnimatedContainer isHealthy={mealsData!.isHealthy} entering={FadeInUp.duration(400).delay(200)}>
             <TouchableOpacity onPress={goHome}>
                 <BackIcon
                     name="arrowleft"
@@ -107,6 +109,6 @@ export function MealInfo(){
                     onPress={handleDeleteMeal}
                 />
             </Container2>
-        </Container>
+        </AnimatedContainer>
     )
 }
