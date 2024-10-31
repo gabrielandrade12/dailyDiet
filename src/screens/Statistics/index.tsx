@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Alert, TouchableOpacity, View } from "react-native";
+import Animated, {FadeInUp, SlideInLeft, SlideInRight} from "react-native-reanimated";
 import { useNavigation } from "@react-navigation/native";
 import { Container, BackIcon, Title, Subtitle, StatisticsContainer,
         StatisticsTitle, InfoContainer, InfoTitle,
@@ -8,6 +9,10 @@ import { Container, BackIcon, Title, Subtitle, StatisticsContainer,
 import { MealStorageDTO } from "@storage/meals/MealsStorageDTO";
 import { getAllMeals } from "@storage/meals/getAllMeals";
 import { getBiggestSequence } from "@storage/meals/getBiggestSequence";
+
+const AnimatedContainer = Animated.createAnimatedComponent(Container)
+const AnimatedInfoContainer = Animated.createAnimatedComponent(InfoContainer)
+const AnimatedHealthyContainer = Animated.createAnimatedComponent(HealthyContainer)
 
 export function Statistics(){
     const [meals, setMeals] = useState<MealStorageDTO[]>([]);
@@ -56,7 +61,7 @@ export function Statistics(){
     },[meals]);
 
     return(
-      <Container percentageInsideDiet={percentageInsideDiet}>
+      <AnimatedContainer entering={FadeInUp.duration(400).delay(200)} percentageInsideDiet={percentageInsideDiet}>
         <TouchableOpacity onPress={handleGoHome}>
             <BackIcon
                 name="arrowleft"
@@ -77,7 +82,7 @@ export function Statistics(){
                 Estatísticas gerais
             </StatisticsTitle>
 
-            <InfoContainer>
+            <AnimatedInfoContainer entering={SlideInLeft.delay(1*200).duration(400)}>
                 <InfoTitle>
                     {biggestHealthyMealsSequence}
                 </InfoTitle>
@@ -85,9 +90,9 @@ export function Statistics(){
                 <Subtitle>
                     melhor sequência de pratos dentro da dieta
                 </Subtitle>
-            </InfoContainer>
+            </AnimatedInfoContainer>
 
-            <InfoContainer>
+            <AnimatedInfoContainer entering={SlideInLeft.delay(2*200).duration(400)}>
                 <InfoTitle>
                     {meals.length}
                 </InfoTitle>
@@ -95,10 +100,10 @@ export function Statistics(){
                 <Subtitle>
                     refeições registradas
                 </Subtitle>
-            </InfoContainer>
+            </AnimatedInfoContainer>
 
             <View style={{width: '100%', flexDirection: 'row', justifyContent: 'space-between' }}>
-                <HealthyContainer isHealthy>
+                <AnimatedHealthyContainer entering={SlideInLeft.delay(3*200).duration(400)} isHealthy>
                     <InfoTitle>
                         {mealsInsideDiet.length}
                     </InfoTitle>
@@ -110,9 +115,9 @@ export function Statistics(){
                     <Subtitle>
                         dieta
                     </Subtitle>
-                </HealthyContainer>
+                </AnimatedHealthyContainer>
 
-                <HealthyContainer isHealthy={false}>
+                <AnimatedHealthyContainer entering={SlideInRight.delay(3*200).duration(400)} isHealthy={false}>
                     <InfoTitle>
                         {mealsOutSideDiet.length}
                     </InfoTitle>
@@ -124,9 +129,9 @@ export function Statistics(){
                     <Subtitle>
                         dieta
                     </Subtitle>
-                </HealthyContainer>
+                </AnimatedHealthyContainer>
             </View>
         </StatisticsContainer>
-      </Container>  
+      </AnimatedContainer>  
     )
 }
