@@ -1,11 +1,11 @@
-import { TouchableOpacity } from "react-native";
+import { Pressable } from "react-native";
 import styled, { css } from "styled-components/native";
 
 type Props = {
     isHealthy: boolean;
 }
 
-export const Container = styled(TouchableOpacity)`
+export const Container = styled(Pressable)`
     width: 100%;
     flex-direction: row;
 

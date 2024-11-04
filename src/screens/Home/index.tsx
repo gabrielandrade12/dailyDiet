@@ -1,8 +1,9 @@
 import { useCallback, useState } from "react";
-import { FlatList } from "react-native";
+import { Alert, FlatList, Pressable } from "react-native";
+import { Swipeable } from "react-native-gesture-handler";
 import { Container, HomeHeader, Logo, ProfilePhoto,
         StatisticsContainer, StatisticsTitle, StatisticsSubtitle, StatisticsIcon,
-        StatisticsButton, Title, DateTitle } from "./styles";
+        StatisticsButton, Title, DateTitle, TrashButton, TrashIcon } from "./styles";
 import { useFocusEffect, useNavigation } from "@react-navigation/native";
 
 import logoImg from '@assets/logo.png';
@@ -14,6 +15,8 @@ import { MealStorageDTO } from "@storage/meals/MealsStorageDTO";
 import { getAllMealDates } from "@storage/mealsDates/getAllMealDates";
 import { getAllMeals } from "@storage/meals/getAllMeals";
 import { deleteDate } from "@storage/mealsDates/deleteDate";
+import { deleteMeal } from "@storage/meals/deleteMeal";
+import { deleteAllMealsAndDates } from "@storage/deleteAllMealsAndDates";
 
 export function Home(){
     const [meals, setMeals] = useState<MealStorageDTO[]>([]);
@@ -55,6 +58,14 @@ export function Home(){
             setMeals(allMeals);
         } catch (error) {
             console.log(error);
+        }
+    }
+
+    async function handleDeleteMeal(mealName: string){
+        try {
+            await deleteMeal(mealName)
+        } catch (error) {
+            Alert.alert('Deletar refeição', 'Não foi possível deletar a refeição')
         }
     }
 
@@ -105,7 +116,22 @@ export function Home(){
                         <DateTitle>
                             {item}
                         </DateTitle>
-                        {meals.map(meal => meal.date === item && <MealCard key={meal.id} mealInfo={meal}/>)}
+
+                        {meals.map( meal => meal.date === item &&
+                            <Swipeable 
+                                key={meal.id}
+                                overshootLeft={false}
+                                renderLeftActions={() => (
+                                    <TrashButton onPress={() => handleDeleteMeal(meal.name)}>
+                                        <TrashIcon name="trash-2"/>
+                                    </TrashButton>
+                                )}           
+                            >
+                                <MealCard 
+                                    mealInfo={meal}
+                                />
+                            </Swipeable>
+                        )}
                     </>
                 )}
                 style={{marginBottom: 12}}

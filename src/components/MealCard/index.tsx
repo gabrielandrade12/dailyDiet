@@ -1,11 +1,11 @@
-import { TouchableOpacityProps } from "react-native";
+import { PressableProps } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 
 import { Container, MealHour, Title, HealthyIndicator } from "./styles";
 
 import { MealStorageDTO } from "@storage/meals/MealsStorageDTO";
 
-type Props = TouchableOpacityProps & {
+type Props = PressableProps & {
     mealInfo: MealStorageDTO;
 }
 

@@ -1,3 +1,4 @@
+import { Pressable } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import styled, { css } from "styled-components/native";
 
@@ -116,3 +117,19 @@ export const DateTitle = styled.Text`
     margin-top: 24px;
     margin-bottom: 8px
 `;
+
+export const TrashButton = styled(Pressable)`
+    width: 55px;
+    height: 55px;
+
+    background-color: ${({ theme }) => theme.COLORS.RED_DARK};
+
+    border-radius: 5px;
+    justify-content: center;
+    align-items: center;
+`;
+
+export const TrashIcon = styled(Feather).attrs(({ theme }) => ({
+    size: 24,
+    color: theme.COLORS.WHITE
+}))``

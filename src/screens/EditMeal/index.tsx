@@ -1,14 +1,16 @@
 import { useState } from "react"
-import { TouchableOpacity, View } from "react-native"
+import { Alert, TouchableOpacity, View } from "react-native"
 import Animated, {FadeInUp} from "react-native-reanimated"
 import { useNavigation, useRoute } from "@react-navigation/native"
 import { Container, BackIcon, Title, Container2, InputTitle, Input, DateInput, HorizontalContainer, InsideDietButton,
         HealthyIndicator, InsideDietButtonTitle
  } from "./styles"
-
-import { MealStorageDTO } from "@storage/meals/MealsStorageDTO"
  
-import { Button } from "@components/Button"
+ import { Button } from "@components/Button"
+
+ import { editMealById } from "@storage/meals/editMealById"
+ import { createMealDate } from "@storage/mealsDates/createMealDate"
+ import { MealStorageDTO } from "@storage/meals/MealsStorageDTO"
 
 type RouteParams = {
     mealsData: MealStorageDTO
@@ -34,6 +36,40 @@ export function EditMeal(){
 
     function handleFeedBackMeal(){
         navigation.navigate('feedBackCreateMeal', { isHealthy: healthy })
+    }
+
+    async function handleEditMeal(){
+        const data_now = new Date()
+
+        if(mealName.trim().length == 0 || date.trim().length == 0 || hour.trim().length == 0){
+            return Alert.alert('Campos obrigatórios', 'Os campos "Nome", "Data" e "Hora" são obrigatórios.')
+        }
+
+        if(parseInt(date.substring(6, 10)) < data_now.getFullYear() || parseInt(date.substring(3,5)) < (data_now.getMonth()+1) && parseInt(date.substring(6, 10)) == data_now.getFullYear() || parseInt(date.substring(0,2)) < data_now.getDate() && parseInt(date.substring(3, 5)) == (data_now.getMonth()+1)){
+            return Alert.alert('Data Inválida', 'Essa data é do passado.')
+        }
+
+        if(parseInt(hour.substring(0,2)) > 23 || parseInt(hour.substring(3,5)) > 59){
+            return Alert.alert('Horário inválido', 'Certifique-se que o horário está entre 00:00 e 23:59')
+        }
+
+        const mealsInfo: MealStorageDTO = {
+            id: mealsData.id,
+            name: mealName,
+            description,
+            date,
+            hour,
+            isHealthy: healthy
+        }
+
+        try {
+            await createMealDate(date);
+            await editMealById(mealsInfo)
+            handleFeedBackMeal()
+        } catch (error) {
+            console.log(error)
+            Alert.alert('Falha ao editar', 'Não foi possível editar a refeição')
+        }
     }
 
     return(
@@ -136,7 +172,7 @@ export function EditMeal(){
 
                 <Button
                     title="Salvar alterações"
-                    onPress={handleFeedBackMeal}
+                    onPress={handleEditMeal}
                 />
             </Container2>
         </AnimatedContainer>
