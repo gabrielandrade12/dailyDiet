@@ -1,6 +1,6 @@
 import styled from "styled-components/native";
 
-type CardColor = 'GREEN' | 'RED' | 'GRAY';
+export type CardColor = 'GREEN' | 'RED' | 'GRAY';
 
 type Props = {
     color: CardColor

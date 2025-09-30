@@ -7,7 +7,7 @@ type IconType = 'Plus' | 'Pencil' | 'Trash'
 type Props = TouchableOpacityProps & {
     buttonType: ButtonType;
     title: string;
-    icon: IconType
+    icon?: IconType
 }
 
 export function Button({ buttonType, title, icon, ...rest }: Props){
@@ -17,7 +17,9 @@ export function Button({ buttonType, title, icon, ...rest }: Props){
                 <PlusIcon color="white"/>:
              icon === 'Pencil' ?
                 <PencilSimpleLineIcon color="white"/>:  
-                <TrashIcon color="white"/>
+             icon === 'Trash' ?
+                <TrashIcon color="white"/> : 
+             null
             }
             <Title buttonType={buttonType}>{title}</Title>
         </Container>
