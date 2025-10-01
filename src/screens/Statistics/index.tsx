@@ -1,11 +1,9 @@
 import { View, Text } from "react-native";
 import { Container, StatisticsContainer, Subtitle, Title } from "./styles";
 
-
 import { ArrowLeftIcon } from 'phosphor-react-native';
 import { theme } from "../../theme";
 import { Card } from "../../components/Card";
-
 
 export function Statistics(){
     return(

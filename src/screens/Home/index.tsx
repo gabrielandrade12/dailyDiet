@@ -1,4 +1,5 @@
-import { SectionList, Text, View } from "react-native";
+import { SectionList, Text } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 import { Container, Header, ListTitle, Logo, ProfilePicture } from "./styles";
 
 import { theme } from '../../theme'
@@ -7,6 +8,8 @@ import logo from '../../images/logo.png'
 import { Card } from "../../components/Card";
 import { Button } from "../../components/Button";
 import { MealCard } from "../../components/MealCard";
+import { RootStackParamList } from "../../routes/routesType";
+import { useRootNavigation } from "../../hooks/navigation";
 
 const DATA = [
     {
@@ -81,6 +84,8 @@ const DATA = [
 ]
 
 export function Home(){
+    const navigation = useRootNavigation()
+
     return(
         <Container>
             <Header>
@@ -88,7 +93,12 @@ export function Home(){
                 <ProfilePicture source={{uri: 'https://github.com/gabrielandrade12.png'}}/>
             </Header>
             
-            <Card style={{ fontSize: 32 }} title="90,86%" subtitle="das refeições dentro da dieta"/>
+            <Card
+                style={{ fontSize: 32 }}
+                title="90,86%"
+                subtitle="das refeições dentro da dieta"
+                onPress={() => navigation.navigate('Statistics')}
+            />
 
             <Text style={{ 
                 fontFamily: theme.fontFamily.regular,
@@ -99,7 +109,12 @@ export function Home(){
             }}>
                 Refeições
             </Text>
-            <Button title="Nova refeição" icon="Plus" buttonType="Black"/>
+            <Button 
+                title="Nova refeição" 
+                icon="Plus" 
+                buttonType="Black" 
+                onPress={() => navigation.navigate('CreateMeal')}
+            />
 
             
             <SectionList
@@ -111,6 +126,7 @@ export function Home(){
                 renderSectionHeader={({ section: {title} }) => (
                     <ListTitle>{title}</ListTitle>
                 )}
+                showsVerticalScrollIndicator={false}
             />
         </Container>
     )

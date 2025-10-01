@@ -6,7 +6,7 @@ type Props = {
     color: CardColor
 }
 
-export const Container = styled.View<Props>`
+export const Container = styled.TouchableOpacity<Props>`
     width: '100%';
     background-color: ${({ theme, color }) => 
                         color === 'GREEN' ? theme.colors.green.light : 
