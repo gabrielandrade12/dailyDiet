@@ -1,23 +1,25 @@
 import { useState } from "react"
 import { View, Text } from "react-native"
-import { Container, CreateMealContainer, HealthyButton, IsInsideDietIndicator, NotHealthyButton, Title } from "./styles"
+import { BackIconContainer, Container, CreateMealContainer,
+        Header, HealthyButton, IsInsideDietIndicator, NotHealthyButton, Title } from "./styles"
 
 import { ArrowLeftIcon } from "phosphor-react-native"
 import { theme } from "../../theme"
+
 import { InputForm } from "../../components/InputForm"
 import { Button } from "../../components/Button"
-
-
 
 export function CreateMeal(){
     const [ isHealthy, setIsHealthy ] = useState(true)
 
     return(
         <Container>
-            <View style={{ flexDirection: 'row', padding: 24 }}>
-                <ArrowLeftIcon color={theme.colors.gray[200]}/>
+            <Header>
+                <BackIconContainer>
+                    <ArrowLeftIcon color={theme.colors.gray[200]}/>
+                </BackIconContainer>
                 <Title>Nova refeição</Title>
-            </View>
+            </Header>
 
             <CreateMealContainer>
                 <InputForm title="Nome"/>

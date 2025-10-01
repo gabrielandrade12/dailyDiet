@@ -10,8 +10,20 @@ export const Container = styled.View`
     padding-top: 24px;
 `;
 
+export const Header = styled.View`
+    width: '100%';
+    justify-content: center;
+    align-items: center;
+    padding: 20px 24px 24px 24px;
+`;
+
+export const BackIconContainer = styled.TouchableOpacity`
+    position: absolute;
+    left: 24px;
+    top: 20px;
+`;
+
 export const Title = styled.Text`
-    flex: 1;
     font-size: 18px;
     font-family: ${({ theme }) => theme.fontFamily.bold};
     color: ${({ theme }) => theme.colors.gray[100]};
@@ -24,7 +36,6 @@ export const CreateMealContainer = styled.View`
     padding-top: 40px;
     border-top-left-radius: 20px;
     border-top-right-radius: 20px;
-    margin-top: 24px;
     gap: 24px;
 `;
 

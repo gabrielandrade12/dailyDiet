@@ -10,6 +10,8 @@ import { Home } from './src/screens/Home';
 import { Statistics } from './src/screens/Statistics';
 import { CreateMeal } from './src/screens/CreateMeal';
 import { CreateMealFeedback } from './src/screens/CreateMealFeedback';
+import { MealInfo } from './src/screens/MealInfo';
+import { EditMeal } from './src/screens/EditMeal'
 
 SplashScreen.preventAutoHideAsync();
 
@@ -31,7 +33,7 @@ export default function App() {
   return (
     <ThemeProvider theme={theme}>
         <StatusBar/>
-        <CreateMealFeedback/>
+        <EditMeal/>
     </ThemeProvider>
   );
 }

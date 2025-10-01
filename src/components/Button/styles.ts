@@ -17,7 +17,7 @@ export const Container = styled.TouchableOpacity<Props>`
 
     background-color: ${({ theme, buttonType }) => buttonType === 'Black' ? theme.colors.gray[200] : theme.colors.gray[700]};
     border-radius: 6px;
-    border-width: ${({ buttonType }) => buttonType === 'Black' ? 1 : 0}px;
+    border-width: ${({ buttonType }) => buttonType === 'Black' ? 0 : 1}px;
     border-color: ${({ theme }) => theme.colors.gray[100]};
 `;
 
