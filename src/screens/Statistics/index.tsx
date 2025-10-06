@@ -1,16 +1,23 @@
-import { View, Text } from "react-native";
+import { View, Text, TouchableOpacity } from "react-native";
 import { Container, StatisticsContainer, Subtitle, Title } from "./styles";
 
 import { ArrowLeftIcon } from 'phosphor-react-native';
 import { theme } from "../../theme";
 import { Card } from "../../components/Card";
+import { useRootNavigation } from "../../hooks/navigation";
 
 export function Statistics(){
+    const navigation = useRootNavigation()
+
     return(
         <Container>
-            <View style={{paddingHorizontal:24, paddingTop: 24}}>
+            <TouchableOpacity 
+                style={{paddingHorizontal:24, paddingTop: 24}}
+                onPress={() => navigation.goBack()}
+            >
                 <ArrowLeftIcon color={theme.colors.green.dark}/>
-            </View>
+            </TouchableOpacity>
+            
             <View style={{alignItems: 'center', gap: 2}}>
                 <Title>90,86%</Title>
                 <Subtitle>das refeições dentro da dieta</Subtitle>

@@ -1,3 +1,4 @@
+import { useRootNavigation } from "../../hooks/navigation";
 import { Container, Hour, Indicator, Line, Title } from "./styles";
 
 type Props = {
@@ -7,8 +8,10 @@ type Props = {
 }
 
 export function MealCard({ hour, title, isHealthy }: Props){
+    const navigation = useRootNavigation()
+
     return(
-        <Container>
+        <Container onPress={() => navigation.navigate('MealInfo')}>
             <Hour>{hour}</Hour>
             <Line/>
             <Title>{title}</Title>

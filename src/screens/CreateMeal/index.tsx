@@ -8,14 +8,17 @@ import { theme } from "../../theme"
 
 import { InputForm } from "../../components/InputForm"
 import { Button } from "../../components/Button"
+import { useRootNavigation } from "../../hooks/navigation"
 
 export function CreateMeal(){
     const [ isHealthy, setIsHealthy ] = useState(true)
+    
+    const navigation = useRootNavigation()
 
     return(
         <Container>
             <Header>
-                <BackIconContainer>
+                <BackIconContainer onPress={() => navigation.goBack()}>
                     <ArrowLeftIcon color={theme.colors.gray[200]}/>
                 </BackIconContainer>
                 <Title>Nova refeição</Title>
@@ -70,7 +73,11 @@ export function CreateMeal(){
                     </View>
                 </View>
 
-                <Button buttonType="Black" title="Cadastrar refeição"/>
+                <Button 
+                    buttonType="Black" 
+                    title="Cadastrar refeição"
+                    onPress={() => navigation.navigate('CreateMealFeedback')}
+                />
             </CreateMealContainer>
         </Container>
     )

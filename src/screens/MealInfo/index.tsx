@@ -3,12 +3,15 @@ import { Container, Title, Header, BackIconContainer, MealInfoContainer, MealTit
 import { ArrowLeftIcon } from "phosphor-react-native"
 import { theme } from "../../theme"
 import { Button } from "../../components/Button"
+import { useRootNavigation } from "../../hooks/navigation"
 
 export function MealInfo(){
+    const navigation = useRootNavigation()
+    
     return(
         <Container>
             <Header>
-                <BackIconContainer>
+                <BackIconContainer onPress={() => navigation.goBack()}>
                     <ArrowLeftIcon color={theme.colors.gray[200]}/>
                 </BackIconContainer>
 
@@ -29,8 +32,19 @@ export function MealInfo(){
                     </HealthyIndicatorBox>
                 </View>
 
-                <Button style={{ marginBottom: 9 }} buttonType="Black" icon="Pencil" title="Editar refeição"/>
-                <Button buttonType="White" icon="Trash" title="Excluir refeição"/>
+                <Button 
+                    style={{ marginBottom: 9 }}
+                    buttonType="Black"
+                    icon="Pencil"
+                    title="Editar refeição"
+                    onPress={() => navigation.navigate('EditMeal')}
+                />
+                
+                <Button 
+                    buttonType="White"
+                    icon="Trash"
+                    title="Excluir refeição"
+                />
             </MealInfoContainer>
         </Container>
     )

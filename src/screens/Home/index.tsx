@@ -1,5 +1,4 @@
 import { SectionList, Text } from "react-native";
-import { useNavigation } from "@react-navigation/native";
 import { Container, Header, ListTitle, Logo, ProfilePicture } from "./styles";
 
 import { theme } from '../../theme'
@@ -8,7 +7,7 @@ import logo from '../../images/logo.png'
 import { Card } from "../../components/Card";
 import { Button } from "../../components/Button";
 import { MealCard } from "../../components/MealCard";
-import { RootStackParamList } from "../../routes/routesType";
+
 import { useRootNavigation } from "../../hooks/navigation";
 
 const DATA = [
@@ -94,7 +93,6 @@ export function Home(){
             </Header>
             
             <Card
-                style={{ fontSize: 32 }}
                 title="90,86%"
                 subtitle="das refeições dentro da dieta"
                 onPress={() => navigation.navigate('Statistics')}

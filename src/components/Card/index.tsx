@@ -1,7 +1,7 @@
-import { TextProps } from "react-native";
+import { TouchableOpacityProps } from "react-native";
 import { Container, SubTitle, Title, CardColor } from "./styles";
 
-type Props = TextProps & {
+type Props = TouchableOpacityProps & {
     title: string;
     subtitle: string;
     color?: CardColor;
@@ -9,8 +9,8 @@ type Props = TextProps & {
 
 export function Card({title, subtitle, color ='GREEN', ...rest}: Props){
     return(
-        <Container color={color}>
-            <Title {...rest}>{title}</Title>
+        <Container color={color} {...rest}>
+            <Title>{title}</Title>
             <SubTitle>{subtitle}</SubTitle>
         </Container>
     )

@@ -6,10 +6,13 @@ import { Button } from "../../components/Button";
 import healthyImg from '../../images/healthyFeedback.png';
 import unHealthyImg from '../../images/unHealthy.png';
 import { theme } from "../../theme";
+import { useRootNavigation } from "../../hooks/navigation";
 
 
 export function CreateMealFeedback(){
     const isHealthy = false
+
+    const navigation = useRootNavigation()
 
     return(
         isHealthy ?
@@ -40,7 +43,11 @@ export function CreateMealFeedback(){
             
             <Image source={unHealthyImg} style={{ marginBottom: 32 }}/>
             
-            <Button buttonType="Black" title="Ir para a página inicial"/>
+            <Button 
+                buttonType="Black" 
+                title="Ir para a página inicial"
+                onPress={() => navigation.navigate('Home')}
+            />
         </Container> 
     )
 }

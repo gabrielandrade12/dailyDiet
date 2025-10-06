@@ -21,7 +21,7 @@ export const Container = styled.TouchableOpacity<Props>`
 
 export const Title = styled.Text`
     font-family: ${({ theme }) => theme.fontFamily.bold};
-    font-size: 16px;
+    font-size: 32px;
     color: ${({ theme }) => theme.colors.gray[200]};
 `;
 
