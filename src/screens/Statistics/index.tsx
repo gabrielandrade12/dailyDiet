@@ -1,9 +1,8 @@
 import { View, Text, TouchableOpacity } from "react-native";
-import { Container, StatisticsContainer, Subtitle, Title } from "./styles";
+import { Box, BoxSubtitle, BoxTitle, Container, StatisticsContainer, Subtitle, Title } from "./styles";
 
 import { ArrowLeftIcon } from 'phosphor-react-native';
 import { theme } from "../../theme";
-import { Card } from "../../components/Card";
 import { useRootNavigation } from "../../hooks/navigation";
 
 export function Statistics(){
@@ -33,30 +32,29 @@ export function Statistics(){
                 </Text>
 
                 <View style={{ gap: 12, marginTop: 23 }}>
-                <Card 
-                    color="GRAY"
-                    title="22"
-                    subtitle="melhor sequência de pratos dentro da dieta"
-                />
-                <Card 
-                    color="GRAY"
-                    title="109"
-                    subtitle="refeições registradas"
-                />
+                    <Box color="GRAY">
+                        <BoxTitle>22</BoxTitle>
+                        <BoxSubtitle>melhor sequência de pratos dentro da dieta</BoxSubtitle>
+                    </Box>
+                    <Box color="GRAY">
+                        <BoxTitle>109</BoxTitle>
+                        <BoxSubtitle>refeições registradas</BoxSubtitle>
+                    </Box>
                 </View>
 
-                <View style={{ flexDirection: 'row', marginTop: 12 }}>
-                    <Card
-                        color="GREEN"
-                        title="99"
-                        subtitle="refeições dentro da dieta"
-                    />
-                    <Card
-                        color="RED"
-                        title="10"
-                        subtitle="refeições fora da dieta"
-                    />
+                <View style={{ flexDirection: 'row', marginTop: 12, gap: 12 }}>
+                    <Box color="GREEN">
+                        <BoxTitle>99</BoxTitle>
+                        <BoxSubtitle>refeições dentro da</BoxSubtitle>
+                        <BoxSubtitle>dieta</BoxSubtitle>
+                    </Box>
+                    <Box color="RED">
+                        <BoxTitle>10</BoxTitle>
+                        <BoxSubtitle>refeições fora da</BoxSubtitle>
+                        <BoxSubtitle>dieta</BoxSubtitle>
+                    </Box>
                 </View>
+
             </StatisticsContainer>
         </Container>
     )
