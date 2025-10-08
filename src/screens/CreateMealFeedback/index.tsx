@@ -10,7 +10,7 @@ import { useRootNavigation } from "../../hooks/navigation";
 
 
 export function CreateMealFeedback(){
-    const isHealthy = false
+    const isHealthy = true
 
     const navigation = useRootNavigation()
 
@@ -26,7 +26,7 @@ export function CreateMealFeedback(){
                 Muito bem!
             </Subtitle>
             
-            <Image source={healthyImg} style={{ marginBottom: 32 }}/>
+            <Image source={healthyImg} style={{ marginBottom: 32, marginTop: 40 }}/>
             
             <Button buttonType="Black" title="Ir para a página inicial"/>
         </Container> 
@@ -38,10 +38,11 @@ export function CreateMealFeedback(){
             <Subtitle>
                 Você 
                 <Subtitle style={{ fontFamily: theme.fontFamily.bold}}> saiu da dieta </Subtitle> 
-                dessa vez, mas continue se esforçando e não desista!
+                dessa vez, mas continue 
             </Subtitle>
+            <Subtitle>se esforçando e não desista!</Subtitle>
             
-            <Image source={unHealthyImg} style={{ marginBottom: 32 }}/>
+            <Image source={unHealthyImg} style={{ marginBottom: 32, marginTop: 40 }}/>
             
             <Button 
                 buttonType="Black" 

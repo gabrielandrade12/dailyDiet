@@ -6,7 +6,7 @@ type Props = {
 
 export const Container = styled.View`
     flex: 1;
-    padding: 32px;
+    padding: 30px;
     background-color: ${({ theme }) => theme.colors.gray[700]};
     justify-content: center;
     align-items: center;
@@ -23,5 +23,5 @@ export const Subtitle = styled.Text`
     font-size: 16px;
     font-family: ${({ theme }) => theme.fontFamily.regular};
     color: ${({ theme }) => theme.colors.gray[100]};
-    margin-bottom: 40px;
+    
 `;
